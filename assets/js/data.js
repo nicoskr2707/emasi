@@ -53,6 +53,17 @@ function normalizeProperty(row) {
     fotosDescripciones.push(descripcionesCrudas[i] || "");
   });
 
+  // La foto de portada va primero (tarjeta y primera foto del carrusel).
+  const fotoPortada = toText(row.foto_portada) || fotos[0] || "";
+  const iPortada = fotos.indexOf(fotoPortada);
+  if (iPortada > 0) {
+    fotos.unshift(fotos.splice(iPortada, 1)[0]);
+    fotosDescripciones.unshift(fotosDescripciones.splice(iPortada, 1)[0]);
+  } else if (iPortada === -1 && fotoPortada) {
+    fotos.unshift(fotoPortada);
+    fotosDescripciones.unshift("");
+  }
+
   const lat = toNumber(row.latitud);
   const lng = toNumber(row.longitud);
 
@@ -96,8 +107,7 @@ function normalizeProperty(row) {
     cantidadFotos: fotos.length || toNumber(row.cantidad_fotos) || 0,
     fotos,
     fotosDescripciones,
-    // La tarjeta usa la primera foto de la lista; si no hay lista, la portada de Tokko.
-    fotoPortada: fotos[0] || toText(row.foto_portada),
+    fotoPortada,
     urlPublica: toText(row.url_publica),
     creada: toText(row.creada),
     descripcion: toText(row.descripcion),
