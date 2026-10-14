@@ -73,13 +73,7 @@
       badges.innerHTML = `<span class="badge badge--consultar">Consultar precio</span>`;
     }
 
-    const galeria = document.getElementById("galeria-fotos");
-    const fotosRestantes = prop.fotoPortada ? prop.cantidadFotos - 1 : 0;
-    galeria.innerHTML = `
-      <div class="galeria__principal">
-        ${fotoHTML(prop)}
-        ${fotosRestantes > 0 ? `<span class="galeria__badge">+${fotosRestantes} fotos próximamente</span>` : ""}
-      </div>`;
+    renderGaleria(document.getElementById("galeria-fotos"), prop);
 
     const specs = document.getElementById("detalle-specs");
     specs.innerHTML = [
@@ -110,6 +104,124 @@
     }
 
     document.title = `${prop.titulo} | ${prop.barrio || "Propiedades"} — Emasi Propiedades`;
+  }
+
+  /**
+   * Carrusel de fotos: pista con scroll-snap (el swipe en mobile sale
+   * gratis), flechas, contador, miniaturas y teclado (← →).
+   */
+  function renderGaleria(galeria, prop) {
+    const fotos = prop.fotos.length ? prop.fotos : prop.fotoPortada ? [prop.fotoPortada] : [];
+
+    if (fotos.length <= 1) {
+      galeria.innerHTML = `<div class="galeria__principal">${fotoHTML(prop)}</div>`;
+      return;
+    }
+
+    const total = fotos.length;
+    const altFoto = (i) =>
+      prop.fotosDescripciones[i] || `Foto ${i + 1} de ${total} de ${prop.titulo}`;
+
+    const slides = fotos
+      .map(
+        (url, i) => `
+        <div class="galeria__slide" role="group" aria-roledescription="foto" aria-label="${i + 1} de ${total}">
+          <img
+            class="media-foto"
+            src="${escapeHTML(url)}"
+            alt="${escapeHTML(altFoto(i))}"
+            ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
+            decoding="async"
+            onerror="manejarErrorFoto(this)"
+          />
+        </div>`
+      )
+      .join("");
+
+    const miniaturas = fotos
+      .map(
+        (url, i) => `
+        <button type="button" class="galeria__mini" data-indice="${i}" aria-label="Ver foto ${i + 1}">
+          <img src="${escapeHTML(url)}" alt="" loading="lazy" decoding="async" onerror="manejarErrorFoto(this)" />
+        </button>`
+      )
+      .join("");
+
+    galeria.setAttribute("aria-roledescription", "carrusel");
+    galeria.innerHTML = `
+      <div class="galeria__principal galeria__principal--carrusel" tabindex="0">
+        <div class="galeria__pista">${slides}</div>
+        <button type="button" class="galeria__flecha galeria__flecha--prev" aria-label="Foto anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="galeria__flecha galeria__flecha--next" aria-label="Foto siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <span class="galeria__badge" aria-live="polite"><span class="galeria__actual">1</span> / ${total}</span>
+      </div>
+      <div class="galeria__miniaturas">${miniaturas}</div>`;
+
+    const principal = galeria.querySelector(".galeria__principal");
+    const pista = galeria.querySelector(".galeria__pista");
+    const prev = galeria.querySelector(".galeria__flecha--prev");
+    const next = galeria.querySelector(".galeria__flecha--next");
+    const contador = galeria.querySelector(".galeria__actual");
+    const minis = Array.from(galeria.querySelectorAll(".galeria__mini"));
+    let actual = -1;
+    const movimiento = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+
+    function irA(i) {
+      const destino = Math.max(0, Math.min(total - 1, i));
+      pista.scrollTo({ left: destino * pista.clientWidth, behavior: movimiento });
+    }
+
+    function marcar(i) {
+      if (i === actual) return;
+      actual = i;
+      contador.textContent = i + 1;
+      prev.disabled = i === 0;
+      next.disabled = i === total - 1;
+      minis.forEach((m, j) => {
+        const activa = j === i;
+        m.classList.toggle("activa", activa);
+        if (activa) m.setAttribute("aria-current", "true");
+        else m.removeAttribute("aria-current");
+      });
+      const mini = minis[i];
+      const tira = mini.parentElement;
+      tira.scrollTo({
+        left: mini.offsetLeft - (tira.clientWidth - mini.offsetWidth) / 2,
+        behavior: movimiento,
+      });
+    }
+
+    let pendiente = false;
+    pista.addEventListener(
+      "scroll",
+      () => {
+        if (pendiente) return;
+        pendiente = true;
+        requestAnimationFrame(() => {
+          pendiente = false;
+          marcar(Math.round(pista.scrollLeft / pista.clientWidth));
+        });
+      },
+      { passive: true }
+    );
+
+    prev.addEventListener("click", () => irA(actual - 1));
+    next.addEventListener("click", () => irA(actual + 1));
+    minis.forEach((m) => m.addEventListener("click", () => irA(Number(m.dataset.indice))));
+    principal.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") { e.preventDefault(); irA(actual - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); irA(actual + 1); }
+    });
+    // Al cambiar el ancho (rotar el celular), mantener la foto actual alineada.
+    window.addEventListener("resize", () => {
+      pista.scrollTo({ left: actual * pista.clientWidth });
+    });
+
+    marcar(0);
   }
 
   function actualizarSEO(prop) {

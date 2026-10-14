@@ -42,6 +42,17 @@ function normalizeProperty(row) {
     });
   }
 
+  // "fotos" y "fotos_descripciones" vienen separadas por "|" y alineadas por posición.
+  const fotosCrudas = toText(row.fotos).split("|").map((f) => f.trim());
+  const descripcionesCrudas = toText(row.fotos_descripciones).split("|").map((d) => d.trim());
+  const fotos = [];
+  const fotosDescripciones = [];
+  fotosCrudas.forEach((url, i) => {
+    if (!url) return;
+    fotos.push(url);
+    fotosDescripciones.push(descripcionesCrudas[i] || "");
+  });
+
   const lat = toNumber(row.latitud);
   const lng = toNumber(row.longitud);
 
@@ -82,8 +93,11 @@ function normalizeProperty(row) {
       .split(",")
       .map((t) => t.trim())
       .filter(Boolean),
-    cantidadFotos: toNumber(row.cantidad_fotos) || 0,
-    fotoPortada: toText(row.foto_portada),
+    cantidadFotos: fotos.length || toNumber(row.cantidad_fotos) || 0,
+    fotos,
+    fotosDescripciones,
+    // La tarjeta usa la primera foto de la lista; si no hay lista, la portada de Tokko.
+    fotoPortada: fotos[0] || toText(row.foto_portada),
     urlPublica: toText(row.url_publica),
     creada: toText(row.creada),
     descripcion: toText(row.descripcion),

@@ -1122,8 +1122,98 @@ button, input, select, textarea { font-family: inherit; }
   color: var(--white);
   font-size: 0.78rem;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
   padding: 0.4rem 0.9rem;
   border-radius: var(--r-pill);
+}
+
+/* Carrusel (lo arma property.js cuando la propiedad tiene más de una foto) */
+.galeria__principal--carrusel:focus-visible {
+  outline: 2px solid var(--emasi-celeste);
+  outline-offset: 3px;
+}
+
+.galeria__pista {
+  display: flex;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.galeria__pista::-webkit-scrollbar { display: none; }
+
+.galeria__slide {
+  flex: 0 0 100%;
+  height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.galeria__flecha {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--emasi-green);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: opacity var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.galeria__flecha svg { width: 22px; height: 22px; }
+.galeria__flecha:hover { background: var(--white); }
+.galeria__flecha:focus-visible { outline: 2px solid var(--emasi-celeste); outline-offset: 2px; }
+.galeria__flecha:disabled { opacity: 0; pointer-events: none; }
+.galeria__flecha--prev { left: 1.4rem; }
+.galeria__flecha--next { right: 1.4rem; }
+
+@media (max-width: 640px) {
+  .galeria__flecha { width: 36px; height: 36px; margin-top: -18px; }
+  .galeria__flecha--prev { left: 0.9rem; }
+  .galeria__flecha--next { right: 0.9rem; }
+}
+
+.galeria__miniaturas {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  padding: 2px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.galeria__mini {
+  flex: 0 0 auto;
+  width: 96px;
+  aspect-ratio: 4 / 3;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--placeholder-bg);
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.galeria__mini img,
+.galeria__mini svg { display: block; width: 100%; height: 100%; object-fit: cover; }
+.galeria__mini:hover { opacity: 0.9; }
+.galeria__mini.activa { opacity: 1; border-color: var(--emasi-green); }
+.galeria__mini:focus-visible { outline: 2px solid var(--emasi-celeste); outline-offset: 2px; }
+
+@media (max-width: 640px) {
+  .galeria__mini { width: 72px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galeria__pista, .galeria__miniaturas { scroll-behavior: auto; }
 }
 
 .detalle__layout {
