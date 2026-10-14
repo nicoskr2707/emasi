@@ -2,6 +2,20 @@
 <html lang="es-AR">
 <head>
 <meta charset="UTF-8" />
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TC6G5NJF');</script>
+<!-- End Google Tag Manager -->
+<script>
+  // Medición: cada clic en un enlace de WhatsApp manda whatsapp_click al dataLayer de GTM
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="wa.me/"], a[href*="api.whatsapp.com"]');
+    if (a) window.dataLayer.push({ event: "whatsapp_click", contact_method: "whatsapp" });
+  }, true);
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emasi Propiedades | Inmobiliaria en Buenos Aires</title>
 <meta name="description" content="30 años de experiencia en el mercado inmobiliario de Buenos Aires. Compra, venta, alquiler, tasaciones y un catálogo de propiedades disponibles actualizado todo en un mismo lugar." />
@@ -47,6 +61,10 @@
 </script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TC6G5NJF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
 <header class="site-header">

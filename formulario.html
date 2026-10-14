@@ -2,6 +2,20 @@
 <html lang="es-AR">
 <head>
 <meta charset="UTF-8" />
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TC6G5NJF');</script>
+<!-- End Google Tag Manager -->
+<script>
+  // Medición: cada clic en un enlace de WhatsApp manda whatsapp_click al dataLayer de GTM
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="wa.me/"], a[href*="api.whatsapp.com"]');
+    if (a) window.dataLayer.push({ event: "whatsapp_click", contact_method: "whatsapp" });
+  }, true);
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Vendé o alquilá con nosotros | Emasi Propiedades</title>
 <meta name="description" content="Completá el formulario y coordinamos tu tasación. Contanos sobre tu propiedad y te contactamos por el medio que prefieras." />
@@ -15,6 +29,10 @@
 <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TC6G5NJF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
 <header class="site-header">
@@ -188,6 +206,7 @@ document.getElementById("form-tasacion").addEventListener("submit", function (e)
   } else if (preferencia === "Teléfono") {
     exito.textContent = "¡Gracias! Te vamos a llamar al +54 11 5036 2005 a la brevedad, o podés llamarnos vos mismo/a a ese número.";
   } else {
+    window.dataLayer.push({ event: "whatsapp_click", contact_method: "whatsapp" });
     window.open("https://wa.me/5491150362005?text=" + encodeURIComponent(mensaje), "_blank", "noopener");
     exito.textContent = "¡Gracias! Se abrió WhatsApp con los datos cargados — solo tenés que enviarlo.";
   }
