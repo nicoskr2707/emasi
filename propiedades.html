@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Propiedades en venta y alquiler en CABA | Emasi Propiedades</title>
+<meta name="description" content="Catálogo de departamentos en venta y alquiler en Buenos Aires: Palermo, Belgrano, Almagro, Floresta, Retiro y Barrio Norte. Filtrá por barrio, operación, ambientes y precio, con ubicación en mapa." />
+<link rel="canonical" href="https://emasi.com.ar/propiedades.html" />
+<meta name="theme-color" content="#004742" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Emasi Propiedades" />
+<meta property="og:title" content="Propiedades en venta y alquiler en CABA | Emasi Propiedades" />
+<meta property="og:description" content="Catálogo de propiedades disponibles en Buenos Aires, actualizado automáticamente, con ubicación en mapa." />
+<meta property="og:locale" content="es_AR" />
+<meta name="twitter:card" content="summary" />
+
+<link rel="icon" href="assets/img/favicon.png" type="image/png" />
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
+<link rel="preload" href="assets/fonts/TTNeoris-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="assets/fonts/TTNeoris-ExtraBold.woff2" as="font" type="font/woff2" crossorigin />
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<link rel="stylesheet" href="assets/css/styles.css" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Emasi Propiedades",
+  "url": "https://emasi.com.ar/",
+  "areaServed": "Ciudad Autónoma de Buenos Aires, Argentina",
+  "email": "info@emasi.com.ar"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="logo" href="index.html"><img class="logo__img" src="assets/img/logo-verde.png" alt="Emasi Propiedades" /></a>
+    <nav class="site-nav" id="site-nav" aria-label="Principal">
+    <a href="index.html">Inicio</a>
+    <a href="nosotros.html">Nosotros</a>
+    <a href="tasaciones.html">Tasaciones</a>
+    <a href="propiedades.html" aria-current="page">Propiedades</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  
+</header>
+
+<main id="contenido">
+  <section class="hero-pagina hero-pagina--catalogo">
+    <img class="hero__iso" src="assets/img/iso-blanco.png" alt="" aria-hidden="true" />
+    <div class="contenedor">
+      <p class="eyebrow">Catálogo de propiedades</p>
+      <h1>Propiedades disponibles</h1>
+      <p>En EMASI Propiedades contamos con una variada oferta de departamentos en diferentes zonas de CABA, que se ajustan a las expectativas y posibilidades de cada comprador.</p>
+      <div class="hero__chips">
+        <span class="chip-stat" id="chip-total">Cargando propiedades…</span>
+        <span class="chip-stat" id="chip-barrios">—</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="contenedor">
+    <form class="filtros" id="filtros" role="search" aria-label="Filtrar propiedades">
+      <div>
+        <label for="filtro-busqueda">Buscar</label>
+        <input type="search" id="filtro-busqueda" placeholder="Barrio, título, descripción…" />
+      </div>
+      <div>
+        <label for="filtro-barrio">Barrio</label>
+        <select id="filtro-barrio">
+          <option value="">Todos</option>
+        </select>
+      </div>
+      <div>
+        <label for="filtro-operacion">Operación</label>
+        <select id="filtro-operacion">
+          <option value="">Venta y alquiler</option>
+          <option value="venta">Venta</option>
+          <option value="alquiler">Alquiler</option>
+          <option value="alquiler_temp">Alquiler temporario</option>
+        </select>
+      </div>
+      <div class="filtros__precio">
+        <label for="filtro-precio-desde">Precio</label>
+        <div class="filtros__precio-row">
+          <input type="number" id="filtro-precio-desde" placeholder="Desde" min="0" inputmode="numeric" />
+          <span class="filtros__precio-sep">–</span>
+          <input type="number" id="filtro-precio-hasta" placeholder="Hasta" min="0" inputmode="numeric" />
+        </div>
+      </div>
+      <div>
+        <label for="filtro-ambientes">Ambientes mín.</label>
+        <select id="filtro-ambientes">
+          <option value="">Cualquiera</option>
+          <option value="1">1+</option>
+          <option value="2">2+</option>
+          <option value="3">3+</option>
+          <option value="4">4+</option>
+          <option value="5">5+</option>
+        </select>
+      </div>
+      <div>
+        <label for="filtro-orden">Ordenar por</label>
+        <select id="filtro-orden">
+          <option value="">Relevancia</option>
+          <option value="precio_asc">Precio: menor a mayor</option>
+          <option value="precio_desc">Precio: mayor a menor</option>
+          <option value="recientes">Más recientes</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn--secundario" id="filtro-limpiar">Limpiar filtros</button>
+      <p class="filtros__nota">El filtro de precio compara el valor en la moneda de cada propiedad (USD para venta, ARS para alquiler). Dejá "Desde" o "Hasta" vacío si no querés ese límite.</p>
+    </form>
+  </div>
+
+  <section class="seccion" id="propiedades">
+    <div class="contenedor">
+      <div class="seccion__encabezado">
+        <div>
+          <span class="eyebrow">Cartera actual</span>
+          <h2>Resultados</h2>
+          <p>Todas nuestras unidades activas, actualizadas desde Tokko Broker.</p>
+        </div>
+        <span id="contador-resultados"></span>
+      </div>
+
+      <p class="estado-carga" id="estado-carga">Cargando propiedades…</p>
+      <div class="grid-propiedades" id="grid-propiedades" hidden></div>
+    </div>
+  </section>
+
+  <section class="seccion" id="mapa">
+    <div class="contenedor">
+      <div class="seccion__encabezado">
+        <div>
+          <span class="eyebrow">Ubicación</span>
+          <h2>Mapa de propiedades</h2>
+          <p>Ubicación de todas las unidades disponibles en Buenos Aires.</p>
+        </div>
+      </div>
+      <div id="mapa-general" class="mapa" role="application" aria-label="Mapa con todas las propiedades disponibles"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="contacto">
+  <img class="footer__iso" src="assets/img/iso-blanco.png" alt="" aria-hidden="true" />
+  <div class="contenedor">
+    <div class="footer__grid">
+      <div class="footer__marca">
+        <a class="logo" href="index.html"><img class="logo__img" src="assets/img/logo-blanco.png" alt="Emasi Propiedades" /></a>
+        <p>Inmobiliaria boutique en Palermo desde 1995. Venta, alquiler y tasaciones en la Ciudad de Buenos Aires.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <p><a href="mailto:info@emasi.com.ar">info@emasi.com.ar</a></p>
+        <div class="footer__social">
+          <a class="icono-social" href="https://www.facebook.com/profile.php?id=61579048959190" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M14 8.5h2V5.6c-.35-.05-1.54-.15-2.94-.15-2.91 0-4.9 1.78-4.9 5.04V13H5.8v3.2h2.36V23h3.3v-6.8h2.5l.38-3.2h-2.88v-2.2c0-.93.26-1.3 1.54-1.3Z" fill="currentColor" /></svg>
+          </a>
+          <a class="icono-social" href="https://www.instagram.com/emasiprop" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.6" /><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6" /><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" /></svg>
+          </a>
+          <a class="icono-social" href="https://wa.me/5491150362005" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2zm0 18.07h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.12.82.83-3.04-.19-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.25 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.12.17 1.74 2.65 4.21 3.72.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29z" /></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Dirección</h4>
+        <address>Arenales 3648, CABA,<br />Buenos Aires, Argentina</address>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="anio"></span> Emasi Propiedades</span>
+      <span>Catálogo de propiedades actualizado automáticamente</span>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/5491150362005" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2zm0 18.07h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.12.82.83-3.04-.19-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.25 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.12.17 1.74 2.65 4.21 3.72.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29z" /></svg>
+</a>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="assets/js/csv-parse.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/cards.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+document.getElementById("anio").textContent = new Date().getFullYear();
+document.getElementById("nav-toggle").addEventListener("click", function () {
+  var nav = document.getElementById("site-nav");
+  var abierto = nav.classList.toggle("abierto");
+  this.setAttribute("aria-expanded", abierto ? "true" : "false");
+});
+</script>
+</body>
+</html>
