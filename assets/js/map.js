@@ -68,7 +68,7 @@ function renderMapaGeneral(elementId, propiedades) {
         <strong>${escapeHTML(prop.titulo)}</strong>
         <span>${escapeHTML(prop.barrio)}</span>
         <span class="map-popup__precio">${formatPrecio(op)}</span>
-        <a href="propiedad.html?id=${encodeURIComponent(prop.id)}">Ver detalle →</a>
+        <a href="${escapeHTML(urlFicha(prop))}">Ver detalle →</a>
       </div>
     `);
     marcador.addTo(capaMarcadores);

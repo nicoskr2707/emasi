@@ -68,14 +68,14 @@ function propertyCardHTML(prop) {
 
   return `
     <article class="card" data-id="${prop.id}">
-      <a class="card__media" href="propiedad.html?id=${encodeURIComponent(prop.id)}" aria-label="Ver detalle de ${escapeHTML(prop.titulo)}">
+      <a class="card__media" href="${escapeHTML(urlFicha(prop))}" aria-label="Ver detalle de ${escapeHTML(prop.titulo)}">
         ${fotoHTML(prop)}
         ${badgeOperacion(op)}
       </a>
       <div class="card__body">
         <p class="card__precio">${formatPrecio(op)}</p>
         <h3 class="card__titulo">
-          <a href="propiedad.html?id=${encodeURIComponent(prop.id)}">${escapeHTML(prop.titulo)}</a>
+          <a href="${escapeHTML(urlFicha(prop))}">${escapeHTML(prop.titulo)}</a>
         </h3>
         <p class="card__ubicacion">${escapeHTML(prop.barrio || "Buenos Aires")}</p>
         <div class="card__specs">${specs}</div>

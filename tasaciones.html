@@ -2,6 +2,24 @@
 <html lang="es-AR">
 <head>
 <meta charset="UTF-8" />
+<!-- Consentimiento (Consent Mode v2): todo denegado hasta que la persona elija -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("consent", "default", {
+    ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied",
+    analytics_storage: "denied", functionality_storage: "granted", security_storage: "granted",
+    wait_for_update: 500
+  });
+  try {
+    if (localStorage.getItem("emasi_consentimiento") === "aceptado") {
+      gtag("consent", "update", {
+        ad_storage: "granted", ad_user_data: "granted", ad_personalization: "granted",
+        analytics_storage: "granted"
+      });
+    }
+  } catch (e) {}
+</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -20,6 +38,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <title>Tasaciones | Emasi Propiedades</title>
 <meta name="description" content="Vendé o alquilá tu propiedad en CABA con el respaldo de 30 años de experiencia. Coordiná tu tasación con Emasi Propiedades." />
 <link rel="canonical" href="https://emasi.com.ar/tasaciones.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Emasi Propiedades" />
+<meta property="og:title" content="Tasaciones | Emasi Propiedades" />
+<meta property="og:description" content="Vendé o alquilá tu propiedad en CABA con el respaldo de 30 años de experiencia. Coordiná tu tasación con Emasi Propiedades." />
+<meta property="og:url" content="https://emasi.com.ar/tasaciones.html" />
+<meta property="og:image" content="https://emasi.com.ar/assets/img/sitio/hero-edificio.jpg" />
+<meta property="og:locale" content="es_AR" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#004742" />
 
 <link rel="icon" href="assets/img/favicon.png" type="image/png" />
@@ -121,5 +147,6 @@ document.getElementById("nav-toggle").addEventListener("click", function () {
   this.setAttribute("aria-expanded", abierto ? "true" : "false");
 });
 </script>
+<script src="assets/js/consent.js"></script>
 </body>
 </html>

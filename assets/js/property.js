@@ -3,8 +3,38 @@
  */
 
 (async function () {
+  // Ficha estática (propiedades/<slug>/): el contenido ya viene en el HTML;
+  // acá solo se agregan el carrusel de fotos y el mapa.
+  const fichaId = document.body.dataset.fichaId;
+  if (fichaId) {
+    try {
+      const propiedades = await cargarPropiedades();
+      const prop = propiedades.find((p) => p.id === fichaId);
+      if (!prop) return;
+      renderGaleria(document.getElementById("galeria-fotos"), prop);
+      if (prop.lat && prop.lng && typeof L !== "undefined") {
+        renderMapaPropiedad("mapa-propiedad", prop);
+      } else {
+        const mapaSeccion = document.getElementById("seccion-mapa");
+        if (mapaSeccion) mapaSeccion.hidden = true;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    return;
+  }
+
   const params = new URLSearchParams(location.search);
   const id = params.get("id");
+
+  // Enlaces viejos (propiedad.html?id=…): si ya existe la ficha estática, redirigir.
+  if (id) {
+    const indice = await cargarIndiceFichas();
+    if (indice[id]) {
+      location.replace(new URL(indice[id].url, RAIZ_SITIO).href);
+      return;
+    }
+  }
 
   const estadoCarga = document.getElementById("estado-carga");
   const contenido = document.getElementById("detalle-propiedad");
