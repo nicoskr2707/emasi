@@ -1,0 +1,86 @@
+{
+  "6328017": {
+    "url": "propiedades/venta-departamento-retiro-4-ambientes-6328017/",
+    "nombre": "Venta departamento 4 ambientes en Retiro",
+    "barrio": "Retiro",
+    "activa": true
+  },
+  "6649511": {
+    "url": "propiedades/venta-departamento-floresta-3-ambientes-6649511/",
+    "nombre": "Venta departamento 3 ambientes en Floresta",
+    "barrio": "Floresta",
+    "activa": true
+  },
+  "6674473": {
+    "url": "propiedades/venta-departamento-floresta-4-ambientes-6674473/",
+    "nombre": "Venta departamento 4 ambientes en Floresta",
+    "barrio": "Floresta",
+    "activa": true
+  },
+  "6698683": {
+    "url": "propiedades/venta-departamento-palermo-5-ambientes-6698683/",
+    "nombre": "Venta departamento 5 ambientes en Palermo",
+    "barrio": "Palermo",
+    "activa": true
+  },
+  "6892734": {
+    "url": "propiedades/venta-departamento-floresta-4-ambientes-6892734/",
+    "nombre": "Venta departamento 4 ambientes en Floresta",
+    "barrio": "Floresta",
+    "activa": true
+  },
+  "7414996": {
+    "url": "propiedades/venta-departamento-palermo-2-ambientes-7414996/",
+    "nombre": "Venta departamento 2 ambientes en Palermo",
+    "barrio": "Palermo",
+    "activa": true
+  },
+  "7881579": {
+    "url": "propiedades/venta-departamento-almagro-2-ambientes-7881579/",
+    "nombre": "Venta departamento 2 ambientes en Almagro",
+    "barrio": "Almagro",
+    "activa": true
+  },
+  "7881635": {
+    "url": "propiedades/venta-departamento-almagro-2-ambientes-7881635/",
+    "nombre": "Venta departamento 2 ambientes en Almagro",
+    "barrio": "Almagro",
+    "activa": true
+  },
+  "7881754": {
+    "url": "propiedades/venta-departamento-almagro-3-ambientes-7881754/",
+    "nombre": "Venta departamento 3 ambientes en Almagro",
+    "barrio": "Almagro",
+    "activa": true
+  },
+  "9500397": {
+    "url": "propiedades/venta-departamento-almagro-2-ambientes-9500397/",
+    "nombre": "Venta departamento 2 ambientes en Almagro",
+    "barrio": "Almagro",
+    "activa": true
+  },
+  "9500510": {
+    "url": "propiedades/venta-departamento-almagro-2-ambientes-9500510/",
+    "nombre": "Venta departamento 2 ambientes en Almagro",
+    "barrio": "Almagro",
+    "activa": true
+  },
+  "10496809": {
+    "url": "propiedades/alquiler-departamento-palermo-2-ambientes-10496809/",
+    "nombre": "Alquiler departamento 2 ambientes en Palermo",
+    "barrio": "Palermo",
+    "activa": true
+  },
+  "10504555": {
+    "url": "propiedades/venta-departamento-belgrano-4-ambientes-10504555/",
+    "nombre": "Venta departamento 4 ambientes en Belgrano",
+    "barrio": "Belgrano",
+    "activa": true
+  },
+  "11171165": {
+    "url": "propiedades/alquiler-departamento-belgrano-2-ambientes-11171165/",
+    "nombre": "Alquiler departamento 2 ambientes en Belgrano",
+    "barrio": "Belgrano",
+    "activa": true
+  }
+}

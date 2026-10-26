@@ -158,7 +158,7 @@
       .map((p, i) => ({
         "@type": "ListItem",
         position: i + 1,
-        url: `${location.origin}${location.pathname.replace(/propiedades\.html$/, "")}propiedad.html?id=${p.id}`,
+        url: urlFicha(p),
       }));
 
     const data = {

@@ -2,6 +2,24 @@
 <html lang="es-AR">
 <head>
 <meta charset="UTF-8" />
+<!-- Consentimiento (Consent Mode v2): todo denegado hasta que la persona elija -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("consent", "default", {
+    ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied",
+    analytics_storage: "denied", functionality_storage: "granted", security_storage: "granted",
+    wait_for_update: 500
+  });
+  try {
+    if (localStorage.getItem("emasi_consentimiento") === "aceptado") {
+      gtag("consent", "update", {
+        ad_storage: "granted", ad_user_data: "granted", ad_personalization: "granted",
+        analytics_storage: "granted"
+      });
+    }
+  } catch (e) {}
+</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -20,14 +38,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <title>Propiedades en venta y alquiler en CABA | Emasi Propiedades</title>
 <meta name="description" content="Catálogo de departamentos en venta y alquiler en Buenos Aires: Palermo, Belgrano, Almagro, Floresta, Retiro y Barrio Norte. Filtrá por barrio, operación, ambientes y precio, con ubicación en mapa." />
 <link rel="canonical" href="https://emasi.com.ar/propiedades.html" />
-<meta name="theme-color" content="#004742" />
-
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Emasi Propiedades" />
 <meta property="og:title" content="Propiedades en venta y alquiler en CABA | Emasi Propiedades" />
 <meta property="og:description" content="Catálogo de propiedades disponibles en Buenos Aires, actualizado automáticamente, con ubicación en mapa." />
+<meta property="og:url" content="https://emasi.com.ar/propiedades.html" />
+<meta property="og:image" content="https://emasi.com.ar/assets/img/sitio/hero-edificio.jpg" />
 <meta property="og:locale" content="es_AR" />
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#004742" />
+
 
 <link rel="icon" href="assets/img/favicon.png" type="image/png" />
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
@@ -151,7 +171,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <p class="estado-carga" id="estado-carga">Cargando propiedades…</p>
-      <div class="grid-propiedades" id="grid-propiedades" hidden></div>
+      <div class="grid-propiedades" id="grid-propiedades" hidden>
+      <!-- fichas:inicio -->
+      <ul class="fichas-estaticas">
+        <li><a href="propiedades/venta-departamento-retiro-4-ambientes-6328017/">Venta departamento 4 ambientes en Retiro</a> · USD 490.000</li>
+        <li><a href="propiedades/venta-departamento-floresta-3-ambientes-6649511/">Venta departamento 3 ambientes en Floresta</a> · USD 289.000</li>
+        <li><a href="propiedades/venta-departamento-floresta-4-ambientes-6674473/">Venta departamento 4 ambientes en Floresta</a> · USD 398.000</li>
+        <li><a href="propiedades/venta-departamento-palermo-5-ambientes-6698683/">Venta departamento 5 ambientes en Palermo</a> · USD 1.445.000</li>
+        <li><a href="propiedades/venta-departamento-floresta-4-ambientes-6892734/">Venta departamento 4 ambientes en Floresta</a> · USD 569.000</li>
+        <li><a href="propiedades/venta-departamento-palermo-2-ambientes-7414996/">Venta departamento 2 ambientes en Palermo</a> · USD 186.000</li>
+        <li><a href="propiedades/venta-departamento-almagro-2-ambientes-7881579/">Venta departamento 2 ambientes en Almagro</a> · USD 133.900</li>
+        <li><a href="propiedades/venta-departamento-almagro-2-ambientes-7881635/">Venta departamento 2 ambientes en Almagro</a> · USD 133.900</li>
+        <li><a href="propiedades/venta-departamento-almagro-3-ambientes-7881754/">Venta departamento 3 ambientes en Almagro</a> · USD 184.000</li>
+        <li><a href="propiedades/venta-departamento-almagro-2-ambientes-9500397/">Venta departamento 2 ambientes en Almagro</a> · USD 139.000</li>
+        <li><a href="propiedades/venta-departamento-almagro-2-ambientes-9500510/">Venta departamento 2 ambientes en Almagro</a> · USD 139.000</li>
+        <li><a href="propiedades/alquiler-departamento-palermo-2-ambientes-10496809/">Alquiler departamento 2 ambientes en Palermo</a> · ARS 1.200.000 / mes</li>
+        <li><a href="propiedades/venta-departamento-belgrano-4-ambientes-10504555/">Venta departamento 4 ambientes en Belgrano</a> · USD 475.000</li>
+        <li><a href="propiedades/alquiler-departamento-belgrano-2-ambientes-11171165/">Alquiler departamento 2 ambientes en Belgrano</a> · ARS 990.000 / mes</li>
+      </ul>
+      <!-- fichas:fin -->
+      </div>
     </div>
   </section>
 
@@ -222,5 +261,6 @@ document.getElementById("nav-toggle").addEventListener("click", function () {
   this.setAttribute("aria-expanded", abierto ? "true" : "false");
 });
 </script>
+<script src="assets/js/consent.js"></script>
 </body>
 </html>

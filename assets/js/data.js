@@ -6,7 +6,32 @@
  * en el próximo acceso de cada visitante — sin recompilar nada.
  */
 
-const CSV_PATH = "propiedades.csv";
+// Raíz del sitio calculada desde la ubicación de este archivo (assets/js/data.js),
+// para que el catálogo funcione igual desde la raíz y desde las fichas estáticas
+// en propiedades/<slug>/.
+const RAIZ_SITIO = new URL("../../", document.currentScript.src);
+const CSV_PATH = new URL("propiedades.csv", RAIZ_SITIO).href;
+const FICHAS_PATH = new URL("assets/data/fichas.json", RAIZ_SITIO).href;
+
+// Índice id → ficha estática, generado por scripts/generar_fichas.py.
+let indiceFichas = {};
+
+async function cargarIndiceFichas() {
+  try {
+    const res = await fetch(`${FICHAS_PATH}?t=${Date.now()}`, { cache: "no-store" });
+    if (res.ok) indiceFichas = await res.json();
+  } catch (err) {
+    indiceFichas = {};
+  }
+  return indiceFichas;
+}
+
+/** URL de la ficha de una propiedad: la página estática si existe, si no la ficha dinámica. */
+function urlFicha(prop) {
+  const ficha = indiceFichas[prop.id];
+  if (ficha && ficha.activa) return new URL(ficha.url, RAIZ_SITIO).href;
+  return new URL(`propiedad.html?id=${encodeURIComponent(prop.id)}`, RAIZ_SITIO).href;
+}
 
 function toNumber(value) {
   if (value === undefined || value === null) return null;
@@ -116,7 +141,10 @@ function normalizeProperty(row) {
 
 /** Trae y parsea el CSV. Devuelve solo propiedades activas (disponibles). */
 async function cargarPropiedades() {
-  const res = await fetch(`${CSV_PATH}?t=${Date.now()}`, { cache: "no-store" });
+  const [res] = await Promise.all([
+    fetch(`${CSV_PATH}?t=${Date.now()}`, { cache: "no-store" }),
+    cargarIndiceFichas(),
+  ]);
   if (!res.ok) throw new Error(`No se pudo cargar ${CSV_PATH} (HTTP ${res.status})`);
   const text = await res.text();
   const filas = parseCSV(text);

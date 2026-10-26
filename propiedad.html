@@ -2,6 +2,24 @@
 <html lang="es-AR">
 <head>
 <meta charset="UTF-8" />
+<!-- Consentimiento (Consent Mode v2): todo denegado hasta que la persona elija -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("consent", "default", {
+    ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied",
+    analytics_storage: "denied", functionality_storage: "granted", security_storage: "granted",
+    wait_for_update: 500
+  });
+  try {
+    if (localStorage.getItem("emasi_consentimiento") === "aceptado") {
+      gtag("consent", "update", {
+        ad_storage: "granted", ad_user_data: "granted", ad_personalization: "granted",
+        analytics_storage: "granted"
+      });
+    }
+  } catch (e) {}
+</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -19,7 +37,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Detalle de propiedad | Emasi Propiedades</title>
 <meta name="description" content="Detalle de propiedad en venta o alquiler en Buenos Aires: características, ubicación en mapa y datos de contacto." />
-<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://emasi.com.ar/propiedad.html" />
+<meta name="robots" content="noindex, follow" />
 <meta name="theme-color" content="#004742" />
 
 <link rel="icon" href="assets/img/favicon.png" type="image/png" />
@@ -162,5 +181,6 @@ document.getElementById("nav-toggle").addEventListener("click", function () {
   this.setAttribute("aria-expanded", abierto ? "true" : "false");
 });
 </script>
+<script src="assets/js/consent.js"></script>
 </body>
 </html>
