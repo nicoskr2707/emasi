@@ -35,18 +35,6 @@
     "barrio": "Palermo",
     "activa": true
   },
-  "7881579": {
-    "url": "propiedades/venta-departamento-almagro-2-ambientes-7881579/",
-    "nombre": "Venta departamento 2 ambientes en Almagro",
-    "barrio": "Almagro",
-    "activa": true
-  },
-  "7881635": {
-    "url": "propiedades/venta-departamento-almagro-2-ambientes-7881635/",
-    "nombre": "Venta departamento 2 ambientes en Almagro",
-    "barrio": "Almagro",
-    "activa": true
-  },
   "7881754": {
     "url": "propiedades/venta-departamento-almagro-3-ambientes-7881754/",
     "nombre": "Venta departamento 3 ambientes en Almagro",
@@ -76,6 +64,24 @@
     "nombre": "Venta departamento 4 ambientes en Belgrano",
     "barrio": "Belgrano",
     "activa": true
+  },
+  "13166328": {
+    "url": "propiedades/venta-departamento-recoleta-5-ambientes-13166328/",
+    "nombre": "Venta departamento 5 ambientes en Recoleta",
+    "barrio": "Recoleta",
+    "activa": true
+  },
+  "7881579": {
+    "url": "propiedades/venta-departamento-almagro-2-ambientes-7881579/",
+    "nombre": "Venta departamento 2 ambientes en Almagro",
+    "barrio": "Almagro",
+    "activa": false
+  },
+  "7881635": {
+    "url": "propiedades/venta-departamento-almagro-2-ambientes-7881635/",
+    "nombre": "Venta departamento 2 ambientes en Almagro",
+    "barrio": "Almagro",
+    "activa": false
   },
   "11171165": {
     "url": "propiedades/alquiler-departamento-belgrano-2-ambientes-11171165/",
